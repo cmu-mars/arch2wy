@@ -1,0 +1,38 @@
+component TurtleBot3FakeNode
+	val name: String
+	port joint_states_pub: requires JointStateIface
+	port odom_pub: requires OdometryIface
+	port tf_pub: requires TFMessageIface
+	port cmd_vel_sub: provides TwistIface
+
+component RobotStatePublisher
+	val name: String
+	port tf_pub: requires TFMessageIface
+	port tf_static_pub: requires TFMessageIface
+	port joint_states_sub: provides JointStateIface
+
+component TurtleBot3TeleopNode
+	val name: String
+	port cmd_vel_pub: requires TwistIface
+
+connector ROS1Topic
+	val name: String
+
+connector ROS1Tf
+
+architecture TurtleBot3Teleop
+	components
+		TurtleBot3FakeNode tbot
+		RobotStatePublisher state
+		TurtleBot3TeleopNode teleop
+
+	connectors
+		ROS1Topic cmd_vel, joint_states, odom
+		ROS1Tf tf, tf_static
+
+	attachments
+		connect tbot.joint_states_pub and state.joint_states_sub with joint_states
+		connect tbot.odom_pub with odom
+		connect tbot.tf_pub and state.tf_pub with tf
+		connect tbot.cmd_vel_sub and teleop.cmd_vel_pub with cmd_vel
+		connect state.tf_static_pub with tf_static

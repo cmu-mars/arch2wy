@@ -1,0 +1,10 @@
+deployment TurtleBot3TeleopDeployment extends TurtleBot3Teleop
+	deployment_platform ros1 default
+
+	tbot.name = "pdw_turtlebot3_fake_node"
+	state.name = "pdw_robot_state_publisher"
+	teleop.name = "pdw_turtlebot3_teleop_keyboard"
+
+	cmd_vel.name = "cmd_vel"
+	joint_states.name = "joint_states"
+	odom.name = "odom"
