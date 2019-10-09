@@ -1,0 +1,65 @@
+- action-clients: []
+  action-servers: []
+  fullname: /pdw_robot_state_publisher
+  kind: pdw_robot_state_publisher
+  name: pdw_robot_state_publisher
+  namespace: /
+  package: pdw_robot_state_publisher
+  provides: []
+  pubs:
+  - format: tf2_msgs/TFMessage
+    name: /tf
+  - format: tf2_msgs/TFMessage
+    name: /tf_static
+  reads:
+  - /pdw_robot_state_publisher/ignore_timestamp
+  - /pdw_robot_state_publisher/publish_frequency
+  - /pdw_robot_state_publisher/use_tf_static
+  subs:
+  - format: sensor_msgs/JointState
+    name: /joint_states
+  uses: []
+  writes: []
+
+- action-clients: []
+  action-servers: []
+  fullname: /pdw_turtlebot3_teleop_keyboard
+  kind: pdw_turtlebot3_teleop_key
+  name: pdw_turtlebot3_teleop_keyboard
+  namespace: /
+  package: pdw_turtlebot3_teleop
+  provides: []
+  pubs:
+  - format: geometry_msgs/Twist
+    name: /cmd_vel
+  reads:
+  - /model
+  subs: []
+  uses: []
+  writes: []
+
+- action-clients: []
+  action-servers: []
+  fullname: /pdw_turtlebot3_fake_node
+  kind: pdw_turtlebot3_fake_node
+  name: pdw_turtlebot3_fake_node
+  namespace: /
+  package: pdw_turtlebot3_fake
+  provides: []
+  pubs:
+  - format: sensor_msgs/JointState
+    name: /joint_states
+  - format: nav_msgs/Odometry
+    name: /odom
+  reads:
+  - /odom_frame
+  - /wheel_left_joint_name
+  - /wheel_right_joint_name
+  - /base_frame
+  - /tb3_model
+  - /joint_states_frame
+  subs:
+  - format: geometry_msgs/Twist
+    name: /cmd_vel
+  uses: []
+  writes: []
